@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>David &amp; Madeleine · 03·X·MMXXVI</title>
+  <title>David &amp; Madeleine · 03·X·2026</title>
   <meta name="description" content="David &amp; Madeleine invite you to their wedding. October 3, 2026 · Grand Saline, Texas. A rustic celebration among sage green and gold." />
 
   <!-- ── Open Graph ── -->
   <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="🌿 David &amp; Madeleine · 03 · X · MMXXVI" />
+  <meta property="og:title"       content="🌿 David &amp; Madeleine · 03 · X · 2026" />
   <meta property="og:description" content="We're getting married in Grand Saline, Texas. October 3, 2026. A rustic wedding among sage and gold · Open your invitation 🌾" />
   <meta property="og:url"         content="https://boda-madeleine.vercel.app/" />
   <meta property="og:image"       content="https://boda-madeleine.vercel.app/sobre.jpg" />
@@ -21,7 +21,7 @@
 
   <!-- ── Twitter / X ── -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="🌿 David &amp; Madeleine · 03 · X · MMXXVI" />
+  <meta name="twitter:title"       content="🌿 David &amp; Madeleine · 03 · X · 2026" />
   <meta name="twitter:description" content="Rustic wedding in Grand Saline, Texas — October 3, 2026 🌾" />
   <meta name="twitter:url"         content="https://boda-madeleine.vercel.app/" />
   <meta name="twitter:image"       content="https://boda-madeleine.vercel.app/sobre.jpg" />
@@ -930,6 +930,42 @@
     }
 
     /* ══════════════════════════════════════════════════════
+       ALBUM DE FOTOS
+    ══════════════════════════════════════════════════════ */
+    #album {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .album-qr-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      margin: 0 auto 28px;
+      max-width: 260px;
+    }
+
+    .album-qr-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+      box-shadow:
+        0 8px 28px rgba(58,51,38,0.12),
+        0 0 0 4px rgba(191,160,104,0.25);
+    }
+
+    .album-qr-hint {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════════════════
        FAMILIA / CORTEJO
     ══════════════════════════════════════════════════════ */
     #familia {
@@ -1570,7 +1606,7 @@
 
         <h1 class="hero-names" id="hero-names">David<span class="amp">&amp;</span>Madeleine</h1>
         <div class="hero-ornament-bottom" id="hero-orn-bottom" aria-hidden="true"></div>
-        <p class="hero-date"  id="hero-date">October 03 · MMXXVI</p>
+        <p class="hero-date"  id="hero-date">October 03 · 2026</p>
         <p class="hero-city"  id="hero-city">Grand Saline · Texas</p>
       </div>
 
@@ -1627,7 +1663,7 @@
 
       <div class="loc-cards">
         <article class="loc-card fu">
-          <p class="loc-type">Ceremony · Civil &amp; Religious</p>
+          <p class="loc-type">Ceremony</p>
           <h3 class="loc-name">Grand Saline · Texas</h3>
           <p class="loc-addr">651 VZ County Road 1319<br>Grand Saline, TX 75140</p>
           <p class="loc-hour">4:00 PM</p>
@@ -1707,7 +1743,7 @@
           </div>
           <time class="itin-time" datetime="2026-10-03T15:30">3:30 PM</time>
           <p class="itin-event">Welcome</p>
-          <p class="itin-desc">Guest arrival with handcrafted lemonade and canapés in the garden</p>
+          <p class="itin-desc">Guest arrival — enjoy lemonade and snacks while the celebration begins</p>
         </div>
 
         <div class="itin-card" role="listitem">
@@ -1718,7 +1754,7 @@
             </svg>
           </div>
           <time class="itin-time" datetime="2026-10-03T16:00">4:00 PM</time>
-          <p class="itin-event">Ceremony · Civil &amp; Religious</p>
+          <p class="itin-event">Ceremony</p>
           <p class="itin-desc">The moment two lives become one, under the open sky</p>
         </div>
 
@@ -1731,7 +1767,7 @@
           </div>
           <time class="itin-time" datetime="2026-10-03T17:00">5:00 PM</time>
           <p class="itin-event">Reception &amp; Toast</p>
-          <p class="itin-desc">Welcome cocktail with wine, sweet tea and country-style bites</p>
+          <p class="itin-desc">Open bar with cocktails, wine, beer and refreshments for all our guests</p>
         </div>
 
         <div class="itin-card" role="listitem">
@@ -1743,7 +1779,7 @@
           </div>
           <time class="itin-time" datetime="2026-10-03T18:30">6:30 PM</time>
           <p class="itin-event">Dinner</p>
-          <p class="itin-desc">Banquet served among wooden tables, candles and eucalyptus centerpieces</p>
+          <p class="itin-desc">Mexican buffet served among wooden tables, candles and eucalyptus centerpieces</p>
         </div>
 
         <div class="itin-card" role="listitem">
@@ -1769,31 +1805,38 @@
 
       <p class="label fu">Dress code</p>
       <h2 class="title fu">Semi <em>Formal</em></h2>
-      <p class="dc-note fu">Inspired by nature · Sage &amp; gold</p>
-
-      <div class="swatches" role="list" aria-label="Suggested color palette">
-        <div class="swatch" role="listitem">
-          <div class="sw-circle" style="background:#5E6E50" aria-label="Dark sage green"></div>
-          <span class="sw-name">Dark sage</span>
-        </div>
-        <div class="swatch" role="listitem">
-          <div class="sw-circle" style="background:#879978" aria-label="Sage green"></div>
-          <span class="sw-name">Sage</span>
-        </div>
-        <div class="swatch" role="listitem">
-          <div class="sw-circle" style="background:#BFA068" aria-label="Champagne gold"></div>
-          <span class="sw-name">Gold</span>
-        </div>
-        <div class="swatch" role="listitem">
-          <div class="sw-circle" style="background:#9A7E48" aria-label="Bronze"></div>
-          <span class="sw-name">Bronze</span>
-        </div>
-      </div>
+      <p class="dc-note fu">Any color is welcome — feel free to express yourself</p>
 
       <p class="dc-avoid fu">✦ Please avoid white, beige and champagne ✦</p>
     </section>
 
-    <!-- ── 7. CORTEJO ──────────────────────────────── -->
+    <!-- ── 7. ÁLBUM DE FOTOS ────────────────────────── -->
+    <section id="album" aria-label="Photo album">
+      <svg class="corner-leaf tl"><use href="#eucalipto-corner"/></svg>
+      <svg class="corner-leaf br"><use href="#eucalipto-corner"/></svg>
+
+      <p class="label fu">Memories</p>
+      <h2 class="title fu">Photo <em>Album</em></h2>
+      <div class="botanical-divider fu">
+        <div class="line"></div>
+        <svg><use href="#leaf-divider"/></svg>
+        <div class="line"></div>
+      </div>
+      <p class="subtitle fu">Scan the code to view and share our wedding photos</p>
+
+      <div class="album-qr-wrap fu">
+        <img
+          class="album-qr-img"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=3F4C37&bgcolor=FFFFFF&qzone=1&data=https%3A%2F%2Fboda-madeleine.vercel.app%2F"
+          alt="QR code to access the wedding photo album"
+          width="180"
+          height="180"
+        />
+        <p class="album-qr-hint">Point your camera at the code<br>to open the album</p>
+      </div>
+    </section>
+
+    <!-- ── 8. CORTEJO ──────────────────────────────── -->
     <section id="familia" aria-label="Bridesmaids and Groomsmen">
       <p class="label fu">Those who walk with us</p>
       <h2 class="title fu">Our <em>Wedding Party</em></h2>
@@ -1969,7 +2012,7 @@
   <!-- ── FOOTER ──────────────────────────────────── -->
   <footer aria-label="Footer">
     <p class="ft-mono">D<span class="amp">&amp;</span>M</p>
-    <p class="ft-date">03 · X · MMXXVI · GRAND SALINE</p>
+    <p class="ft-date">03 · X · 2026 · GRAND SALINE</p>
     <div class="ft-rule"></div>
     <p class="ft-tagline">With love, among oaks and gold</p>
     <p class="ft-credit">
