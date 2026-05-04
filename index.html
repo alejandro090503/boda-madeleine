@@ -144,7 +144,6 @@
       object-position: center;
       z-index: 2;
       transform: scale(1.18);
-      filter: hue-rotate(50deg) saturate(0.6) brightness(0.92);
     }
 
     /* Video de apertura — oculto hasta que el usuario toca */
@@ -158,7 +157,6 @@
       z-index: 3;
       opacity: 0;
       transform: scale(1.18);
-      filter: hue-rotate(50deg) saturate(0.6);
     }
 
     /* Sello rústico encima del sobre con monograma D&M */
@@ -1483,29 +1481,6 @@
     <img id="env-image" src="sobre.jpg" alt="Wedding envelope David &amp; Madeleine" />
     <video id="env-video" src="sobre-apertura.mp4" playsinline webkit-playsinline muted preload="auto"></video>
 
-    <!-- Sello rústico con monograma D&M -->
-    <svg class="env-seal" id="env-seal" viewBox="0 0 200 200" aria-hidden="true">
-      <!-- Aro exterior -->
-      <circle cx="100" cy="100" r="78" fill="none" stroke="#DEC79A" stroke-width="1.2" opacity="0.85"/>
-      <circle cx="100" cy="100" r="68" fill="none" stroke="#DEC79A" stroke-width="0.5" opacity="0.6"/>
-      <!-- Hojas eucalipto izquierda -->
-      <g opacity="0.75" stroke="#B5C2A4" stroke-width="0.8" fill="none" stroke-linecap="round">
-        <path d="M30 100 Q50 90 70 100"/>
-        <ellipse cx="40" cy="92" rx="4" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(-25 40 92)"/>
-        <ellipse cx="50" cy="88" rx="4.5" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(-15 50 88)"/>
-        <ellipse cx="62" cy="90" rx="4" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(-5 62 90)"/>
-      </g>
-      <!-- Hojas derecha -->
-      <g opacity="0.75" stroke="#B5C2A4" stroke-width="0.8" fill="none" stroke-linecap="round">
-        <path d="M170 100 Q150 90 130 100"/>
-        <ellipse cx="160" cy="92" rx="4" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(25 160 92)"/>
-        <ellipse cx="150" cy="88" rx="4.5" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(15 150 88)"/>
-        <ellipse cx="138" cy="90" rx="4" ry="2" fill="#B5C2A4" opacity="0.55" transform="rotate(5 138 90)"/>
-      </g>
-      <!-- Monograma D & M -->
-      <text x="100" y="115" text-anchor="middle" fill="#DEC79A" font-family="Pinyon Script, cursive" font-size="62">D<tspan font-family="Cormorant Garamond, serif" font-size="36" font-style="italic" fill="#ECDDB8">&amp;</tspan>M</text>
-    </svg>
-
     <p class="envelope-hint" id="env-hint">Tap to open</p>
   </div>
 
@@ -2068,25 +2043,17 @@
     var envImage  = document.getElementById('env-image');
     var envVideo  = document.getElementById('env-video');
     var envFlash  = document.getElementById('env-flash');
-    var envSeal   = document.getElementById('env-seal');
     var hint      = document.getElementById('env-hint');
     var opened    = false;
 
     gsap.timeline()
       .to(envScreen, { opacity: 1, duration: 1.1, ease: 'power2.out', delay: 0.3 })
-      .to(envSeal,   { opacity: 1, duration: 1.0, ease: 'power2.out' }, '-=0.6')
       .to(hint,      { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4');
 
     gsap.to(envImage, {
       scale: 1.20, duration: 2.4, ease: 'sine.inOut',
       repeat: -1, yoyo: true, delay: 1.5
     });
-    gsap.to(envSeal, {
-      scale: 1.04, duration: 2.4, ease: 'sine.inOut',
-      repeat: -1, yoyo: true, delay: 1.5,
-      transformOrigin: 'center center'
-    });
-
     var flashStarted    = false;
     var invitationReady = false;
 
@@ -2133,10 +2100,8 @@
       opened = true;
 
       gsap.killTweensOf(envImage);
-      gsap.killTweensOf(envSeal);
 
       gsap.to(hint,    { opacity: 0, duration: 0.2 });
-      gsap.to(envSeal, { opacity: 0, scale: 1.4, duration: 0.6, ease: 'power2.in' });
 
       var playPromise = envVideo.play();
 
