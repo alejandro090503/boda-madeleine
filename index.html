@@ -1940,30 +1940,21 @@
       </div>
       <p class="subtitle fu">Please confirm before September 3rd</p>
 
-      <p class="rsvp-counter fu">This invitation includes <strong>2 passes</strong></p>
+      <p class="rsvp-counter fu">This invitation includes <strong id="rsvp-passes-label">1 pass</strong></p>
 
       <div>
         <div class="rsvp-field fu">
-          <label for="rsvp-name">Guest name</label>
+          <label for="rsvp-name">Your name</label>
           <input
             type="text"
             id="rsvp-name"
             class="rsvp-input"
-            placeholder="E.g. Sofia, the Garcia family…"
+            placeholder="Your full name"
             autocomplete="name"
           />
         </div>
 
-        <div class="rsvp-field fu">
-          <label for="rsvp-companion">Guest(s)</label>
-          <input
-            type="text"
-            id="rsvp-companion"
-            class="rsvp-input"
-            placeholder="Name of who's coming with you (optional)"
-            autocomplete="off"
-          />
-        </div>
+        <div id="rsvp-guests-container"></div>
 
         <div class="rsvp-field fu">
           <label for="rsvp-song">🎵 Song suggestion</label>
@@ -2389,20 +2380,59 @@
     setInterval(tick, 1000);
   }
 
-  /* ── RSVP – Construir mensaje ──────────────── */
+  /* ── RSVP – Pases desde URL (?pases=N) ─────── */
   var WA_PHONE  = '17869881995';
   var SMS_PHONE = '+17869881995';
 
+  (function initRsvp() {
+    var params = new URLSearchParams(window.location.search);
+    var pases  = Math.min(5, Math.max(1, parseInt(params.get('pases'), 10) || 1));
+    var label  = document.getElementById('rsvp-passes-label');
+    var container = document.getElementById('rsvp-guests-container');
+
+    label.textContent = pases === 1
+      ? '1 pass'
+      : pases + ' passes';
+
+    for (var i = 1; i < pases; i++) {
+      var div   = document.createElement('div');
+      div.className = 'rsvp-field fu';
+      var gId   = 'rsvp-guest-' + i;
+      var lbl   = document.createElement('label');
+      lbl.setAttribute('for', gId);
+      lbl.textContent = 'Guest ' + i;
+      var inp   = document.createElement('input');
+      inp.type  = 'text';
+      inp.id    = gId;
+      inp.className = 'rsvp-input';
+      inp.placeholder = 'Full name of guest ' + i;
+      inp.autocomplete = 'off';
+      div.appendChild(lbl);
+      div.appendChild(inp);
+      container.appendChild(div);
+    }
+  }());
+
+  /* ── RSVP – Construir mensaje ──────────────── */
   function buildMessage() {
-    var name      = document.getElementById('rsvp-name').value.trim() || 'guest';
-    var companion = document.getElementById('rsvp-companion').value.trim();
-    var song      = document.getElementById('rsvp-song').value.trim();
-    var siteUrl   = window.location.origin + window.location.pathname.replace(/\/$/, '');
+    var name    = document.getElementById('rsvp-name').value.trim() || 'guest';
+    var song    = document.getElementById('rsvp-song').value.trim();
+    var siteUrl = window.location.origin + window.location.pathname.replace(/\/$/, '');
+
+    var guests = [];
+    var i = 1;
+    while (true) {
+      var el = document.getElementById('rsvp-guest-' + i);
+      if (!el) break;
+      var v = el.value.trim();
+      if (v) guests.push(v);
+      i++;
+    }
 
     var msg =
       'Hi David & Madeleine 🌿\n\n' +
       'I\'m *' + name + '* and I\'m confirming my attendance at your wedding. 💍';
-    if (companion) msg += '\nI\'ll be coming with: *' + companion + '*';
+    if (guests.length) msg += '\nI\'ll be coming with: *' + guests.join(', ') + '*';
     msg +=
       '\n\n📅 *October 3, 2026*\n' +
       '📍 Grand Saline, Texas\n' +
