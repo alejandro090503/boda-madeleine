@@ -2354,13 +2354,14 @@
 
   /* ── Countdown ─────────────────────────────── */
   function startCountdown() {
-    /* Texas (CDT, UTC-5 en octubre) — 3 oct 2026, 4:00 PM */
-    var target = new Date('2026-10-03T16:00:00-05:00');
+    /* Oct 3 2026, 4:00 PM CDT = 21:00 UTC — Date.UTC avoids timezone-string parsing bugs in Safari/iOS */
+    var target = new Date(Date.UTC(2026, 9, 3, 21, 0, 0));
 
     function pad(n, len) { return String(n).padStart(len, '0'); }
 
     function flip(id, val) {
       var el = document.getElementById(id);
+      if (!el) return;
       if (el.textContent === val) return;
       el.classList.add('flipping');
       setTimeout(function () {
@@ -2370,9 +2371,12 @@
     }
 
     function tick() {
-      var diff = target - Date.now();
+      var diff = target.getTime() - Date.now();
       if (diff <= 0) {
-        ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){ document.getElementById(id).textContent = '00'; });
+        ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){
+          var el = document.getElementById(id);
+          if (el) el.textContent = '00';
+        });
         return;
       }
       flip('cd-d', pad(Math.floor(diff / 86400000), 3));
